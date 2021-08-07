@@ -1,0 +1,29 @@
+{
+    "name": "dcms/cms",
+    "description": "The CMS module of the system",
+    "authors": [
+        {
+            "name": "Damian Bialkowski",
+            "email": "damianbialkowski8@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Cms\\Providers\\CmsServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "require": {
+        "kalnoy/nestedset": "^5.0",
+        "facuz/laravel-themes": "^3.2",
+        "dcms/core": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Cms\\": ""
+        }
+    }
+}
