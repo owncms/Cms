@@ -1,5 +1,5 @@
 {
-    "name": "dcms/cms",
+    "name": "owncms/cms",
     "description": "The CMS module of the system",
     "authors": [
         {
@@ -19,7 +19,7 @@
     "require": {
         "kalnoy/nestedset": "^5.0",
         "facuz/laravel-themes": "^3.2",
-        "dcms/core": "dev-master"
+        "owncms/core": "dev-master"
     },
     "autoload": {
         "psr-4": {
