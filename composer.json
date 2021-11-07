@@ -19,7 +19,7 @@
     "require": {
         "kalnoy/nestedset": "^5.0",
         "facuz/laravel-themes": "^3.2",
-        "owncms/core": "dev-master"
+        "dbcms/core": "dev-master"
     },
     "autoload": {
         "psr-4": {
