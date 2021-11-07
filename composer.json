@@ -17,9 +17,9 @@
         }
     },
     "require": {
+        "owncms/core": "dev-master",
         "kalnoy/nestedset": "^5.0",
-        "facuz/laravel-themes": "^3.2",
-        "dbcms/core": "dev-master"
+        "facuz/laravel-themes": "^3.2"
     },
     "autoload": {
         "psr-4": {
