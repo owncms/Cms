@@ -1,10 +1,12 @@
 {
     "name": "owncms/cms",
     "description": "The CMS module of the system",
+    "type": "owncms-module",
+    "license": "MIT",
     "authors": [
         {
             "name": "Damian Bialkowski",
-            "email": "damianbialkowski8@gmail.com"
+            "email": "damianbialkowski.info@gmail.com"
         }
     ],
     "extra": {
