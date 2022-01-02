@@ -29,12 +29,16 @@ class DomainObserver
     public function saved(Domain $domain)
     {
         $data = request()->all();
-        $selectedLanguages = $data['selected_languages'];
-        $selectedLanguages[$data['default_language']] = ['default' => 1];
-        $domain->selectedLanguages()->where('default', 1)->update([
-            'default' => 0
-        ]);
-        $domain->selectedLanguages()->sync($selectedLanguages);
+        if (isset($data['selected_languages'])) {
+            $selectedLanguages = $data['selected_languages'];
+            $selectedLanguages[$data['default_language']] = ['default' => 1];
+            $domain->selectedLanguages()->where('default', 1)->update(
+                [
+                    'default' => 0
+                ]
+            );
+            $domain->selectedLanguages()->sync($selectedLanguages);
+        }
     }
 
     /**

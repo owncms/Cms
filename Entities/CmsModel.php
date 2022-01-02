@@ -11,10 +11,10 @@ use Modules\Core\Traits\Translatable;
 
 class CmsModel extends CoreModel
 {
-    use SoftDeletes,
-        CmsTrait,
-        OnlineModel,
-        Translatable;
+    use SoftDeletes;
+    use CmsTrait;
+    use OnlineModel;
+    use Translatable;
 
     protected $dates = [
         'deleted_at',
@@ -29,7 +29,7 @@ class CmsModel extends CoreModel
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->bootBaseTrait();
+        $this->bootListeners();
     }
 
     public function sluggable(): array

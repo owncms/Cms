@@ -58,16 +58,19 @@ class Domain extends CmsModel
         return null;
     }
 
-    public function init()
+    public function init(): void
     {
         $app = app();
         $defaultLanguage = $this->default_language;
         App::setLocale($defaultLanguage->locale);
         if ($this->url != '*') {
-            config([
-                'app.url' => $this->url,
-            ]);
+            config(
+                [
+                    'app.url' => $this->url,
+                ]
+            );
         }
+
         $app->singleton('Domain', function () {
             return $this;
         });

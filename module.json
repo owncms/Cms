@@ -5,9 +5,12 @@
     "keywords": [],
     "priority": 3,
     "providers": [
-        "Modules\\Cms\\Providers\\CmsServiceProvider"
+        "Modules\\Cms\\Providers\\CmsServiceProvider",
+        "Facuz\\Theme\\ThemeServiceProvider"
     ],
-    "aliases": {},
+    "aliases": {
+        "Theme": "Facuz\\Theme\\Facades\\Theme"
+    },
     "files": [],
     "requires": [],
     "abilities": [
