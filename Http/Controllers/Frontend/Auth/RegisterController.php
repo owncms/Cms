@@ -14,6 +14,8 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
+    private $redirectTo = '/';
+
     public function showRegistrationForm()
     {
         if (auth()->check()) {
@@ -30,9 +32,7 @@ class RegisterController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        dd($request->all());
         event(new Registered($user = CmsUser::create($request->all())));
-        dd($user);
 
         $this->guard()->login($user);
 
