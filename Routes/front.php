@@ -16,6 +16,6 @@ Route::group(['prefix' => 'my-account'], function () {
     Route::group(['middleware' => ['auth:web']], function () {
         Route::get('profile', [ProfileController::class, 'dashboard'])->name('profile');
         Route::get('profile/change', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::post('profile/change', [ProfileController::class, 'change'])->name('profile.change');
+        Route::post('profile/change', [ProfileController::class, 'update'])->name('profile.change');
     });
 });

@@ -19,7 +19,7 @@ class SidebarExtender extends AbstractAdminSidebar
         if ($canDomain) {
             $menu->group($this->getModuleName(), function (Group $group) use ($canDomain, $canLanguage) {
                 $group->item('Cms', function (Item $item) use ($canDomain, $canLanguage) {
-                    $item->icon('fa fa-cog');
+                    $item->icon('fa fa-tasks');
                     if ($canDomain) {
                         $item->item('Domains', function (Item $item) {
                             $item->route($this->adminRoute('cms.domains.index'));

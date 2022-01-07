@@ -18,7 +18,9 @@ class CmsUser extends AuthModel
         'email',
         'username',
         'password',
-        'email_verified_at'
+        'email_verified_at',
+        'remember_token',
+        'options'
     ];
 
     protected $dates = [
@@ -28,8 +30,14 @@ class CmsUser extends AuthModel
         'deleted_at'
     ];
 
+    protected $casts = [
+        'options' => 'array'
+    ];
+
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = bcrypt($value);
+        if ($value) {
+            $this->attributes['password'] = bcrypt($value);
+        }
     }
 }

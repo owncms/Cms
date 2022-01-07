@@ -30,6 +30,7 @@ class RegisterController extends Controller
      */
     public function register(RegisterRequest $request)
     {
+        dd($request->all());
         event(new Registered($user = CmsUser::create($request->all())));
         dd($user);
 

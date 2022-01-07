@@ -4,6 +4,7 @@ namespace Modules\Cms\Http\Controllers\Frontend;
 
 use Facuz\Theme\Contracts\Theme;
 use Illuminate\Http\Request;
+use Modules\Cms\Http\Requests\Frontend\CmsUserRequest;
 
 class ProfileController extends Controller
 {
@@ -29,8 +30,14 @@ class ProfileController extends Controller
         );
     }
 
-    public function update(Request $request)
+    public function update(CmsUserRequest $request)
     {
-        dd($request->all());
+        $user = auth()->user();
+        $data = $request->all();
+        if (!isset($data['password']) || !$data['password']) {
+            unset($data['password'], $data['password_confirmation']);
+        }
+        $user->update($data);
+        return redirect()->back()->with('success', 'Your account has been updated!');
     }
 }

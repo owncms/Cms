@@ -4,20 +4,19 @@ namespace Modules\Cms\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class CmsUserRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'name' => 'max:255',
-            'email' => 'required|unique:cms_users,email',
-            'username' => 'required|min:2|max:255|unique:cms_users,username',
-            'password' => 'required|confirmed|max:255'
+            'username' => 'required|unique:cms_users,username|min:2|max:255',
+            'email' => 'required|email|max:255|unique:cms_users,email',
+            'password' => 'required|confirmed|min:6',
         ];
     }
 
@@ -26,7 +25,7 @@ class RegisterRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
