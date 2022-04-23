@@ -2,6 +2,7 @@
 
 namespace Modules\Cms\Entities;
 
+use Carbon\Carbon;
 use Modules\Cms\Entities\DomainLanguage;
 use Modules\Cms\Entities\Language;
 use Illuminate\Support\Facades\App;
@@ -50,7 +51,7 @@ class Domain extends CmsModel
         return $this->selectedLanguages()->where('default', 1);
     }
 
-    public function getDefaultLanguageAttribute(): mixed
+    public function getDefaultLanguageAttribute()
     {
         if ($defaultLanguage = $this->defaultLanguage()) {
             return $defaultLanguage->first();
@@ -63,6 +64,7 @@ class Domain extends CmsModel
         $app = app();
         $defaultLanguage = $this->default_language;
         App::setLocale($defaultLanguage->locale);
+        Carbon::setLocale($defaultLanguage->locale);
         if ($this->url != '*') {
             config(
                 [

@@ -2,9 +2,11 @@
 
 namespace Modules\Cms\Providers;
 
+use Illuminate\Routing\Router;
 use Modules\Cms\Entities\Domain;
 use Modules\Cms\Entities\Language;
 use Modules\Cms\Observers\DomainObserver;
+use Modules\Cms\src\LinkManager\Router as ExtendedRouter;
 use Modules\Core\Providers\Base\ModuleServiceProvider;
 
 class CmsServiceProvider extends ModuleServiceProvider
@@ -20,7 +22,6 @@ class CmsServiceProvider extends ModuleServiceProvider
     public function boot()
     {
         parent::boot();
-        $this->registerObservers();
 
         if ($this->getApplication()->isFrontend()) {
             $this->setDomain();
@@ -37,11 +38,12 @@ class CmsServiceProvider extends ModuleServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-    }
 
-    public function registerObservers()
-    {
-        Domain::observe(DomainObserver::class);
+        Router::macro('replaceMiddleware', function ($middleware = [], $middlewareGroups = []) {
+            $this->middleware = $middleware;
+            $this->middlewareGroups = $middlewareGroups;
+        });
+        $this->app->singleton('router', ExtendedRouter::class);
     }
 
     public function setDomain()

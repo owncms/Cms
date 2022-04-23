@@ -12,11 +12,13 @@ class Controller extends BaseController
 {
     public $domain;
     protected $theme;
+    public $locale;
 
     public function __construct(Theme $theme)
     {
         $this->domain = resolve('Domain');
         $this->theme = $theme->layout('default');
+        $this->locale = app()->getLocale();
     }
 
     /**

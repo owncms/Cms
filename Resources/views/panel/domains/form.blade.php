@@ -34,6 +34,11 @@
                                    role="tab"
                                    aria-controls="pills-general" aria-selected="true">General</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-search-tab" data-toggle="pill" href="#search"
+                                   role="tab"
+                                   aria-controls="pills-search" aria-selected="true">Search</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -46,66 +51,85 @@
                     {!! form_start($form, ['id' => 'domainForm']) !!}
                     <div class="container-fluid">
                         <div class="tab-content">
-                        <div class="tab-pane fade show active" id="general" role="tabpanel"
-                             aria-labelledby="pills-general-tab">
-                            <div class="row">
-                                <div class="col-md-6 col-xs-12">
-                                    {!! form_row($form->name) !!}
-                                    {!! form_row($form->url) !!}
-                                    {!! form_row($form->active) !!}
-                                    {!! form_row($form->default) !!}
-                                </div>
-                                <div class="col-md-6 col-xs-12">
-                                    @php
-                                        $languages = $item->languages();
-                                        $selectedLanguages = $item->selectedLanguagesInForm();
-                                        $defaultLanguage = $item->default_language;
-                                    @endphp
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <span>Available languages</span>
-                                            <div class="language-list">
-                                                @foreach($languages as $language)
-                                                    <div class="form-group">
-                                                        <input type="checkbox"
-                                                               name="selected_languages[{{$language->id}}]"
-                                                               id="selected_language_{{$language->id}}"
-                                                               @if(in_array($language->id, $selectedLanguages)) checked
-                                                               @endif
-                                                               value="{{$language->id}}">
-                                                        <label for="selected_language_{{$language->id}}"
-                                                               class="control-label">{{ $language->name }}</label>
-                                                    </div>
-                                                @endforeach
-                                                @error('selected_languages')
-                                                <div class="text-danger">{{ $message }}</div>
-                                                @enderror
+                            <div class="tab-pane fade show active" id="general" role="tabpanel"
+                                 aria-labelledby="pills-general-tab">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-12">
+                                        {!! form_row($form->name) !!}
+                                        {!! form_row($form->url) !!}
+                                        {!! form_row($form->active) !!}
+                                        {!! form_row($form->default) !!}
+                                    </div>
+                                    <div class="col-md-6 col-xs-12">
+                                        @php
+                                            $languages = $item->languages();
+                                            $selectedLanguages = $item->selectedLanguagesInForm();
+                                            $defaultLanguage = $item->default_language;
+                                        @endphp
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <span>Available languages</span>
+                                                <div class="language-list">
+                                                    @foreach($languages as $language)
+                                                        <div class="form-group">
+                                                            <input type="checkbox"
+                                                                   name="selected_languages[{{$language->id}}]"
+                                                                   id="selected_language_{{$language->id}}"
+                                                                   @if(in_array($language->id, $selectedLanguages)) checked
+                                                                   @endif
+                                                                   value="{{$language->id}}">
+                                                            <label for="selected_language_{{$language->id}}"
+                                                                   class="control-label">{{ $language->name }}</label>
+                                                        </div>
+                                                    @endforeach
+                                                    @error('selected_languages')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <span>Default language</span>
-                                            <div class="language-list">
-                                                @foreach($languages as $language)
-                                                    <div class="form-group">
-                                                        <input type="radio" name="default_language"
-                                                               id="default_language_{{$language->id}}"
-                                                               @if($defaultLanguage && $language->id === $defaultLanguage->id) checked
-                                                               @endif
-                                                               value="{{ $language->id }}">
-                                                        <label for="default_language_{{$language->id}}"
-                                                               class="control-label">{{ $language->name }}</label>
-                                                    </div>
-                                                @endforeach
-                                                @error('default_language')
-                                                <div class="text-danger">{{ $message }}</div>
-                                                @enderror
+                                            <div class="col-md-4">
+                                                <span>Default language</span>
+                                                <div class="language-list">
+                                                    @foreach($languages as $language)
+                                                        <div class="form-group">
+                                                            <input type="radio" name="default_language"
+                                                                   id="default_language_{{$language->id}}"
+                                                                   @if($defaultLanguage && $language->id === $defaultLanguage->id) checked
+                                                                   @endif
+                                                                   value="{{ $language->id }}">
+                                                            <label for="default_language_{{$language->id}}"
+                                                                   class="control-label">{{ $language->name }}</label>
+                                                        </div>
+                                                    @endforeach
+                                                    @error('default_language')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade show" id="search" role="tabpanel"
+                                 aria-labelledby="pills-search-tab">
+                                <div class="row">
+                                    @foreach($searchableModels as $moduleName => $models)
+                                        <div class="col-md-12 title">{{ $moduleName }}</div>
+                                        @foreach($models as $model => $trans)
+                                            <div class="row">
+                                                <div class="col-md-2 text-left"><span
+                                                        class="pl-3">{{ $model }}</span>
+                                                </div>
+                                                <div class="col-md-2 text-left"><span
+                                                        class="pl-3">{{ $trans }}</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endforeach
+                                </div>
+                            </div>
+                            {!! form_end($form, false) !!}
                         </div>
-                        {!! form_end($form, false) !!}
                     </div>
                 </div>
             </div>

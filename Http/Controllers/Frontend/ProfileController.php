@@ -19,6 +19,9 @@ class ProfileController extends Controller
         );
     }
 
+    /**
+     * @return \Illuminate\Http\Response
+     */
     public function edit()
     {
         $user = auth()->user();
@@ -30,6 +33,10 @@ class ProfileController extends Controller
         );
     }
 
+    /**
+     * @param CmsUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(CmsUserRequest $request)
     {
         $user = auth()->user();
