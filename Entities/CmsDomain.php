@@ -3,11 +3,12 @@
 namespace Modules\Cms\Entities;
 
 use Carbon\Carbon;
-use Modules\Cms\Entities\DomainLanguage;
-use Modules\Cms\Entities\Language;
+use Modules\Cms\Entities\CmsDomainLanguage;
+use Modules\Cms\Entities\CmsLanguage;
 use Illuminate\Support\Facades\App;
+use Modules\Cms\Scopes\JsonActiveScope;
 
-class Domain extends CmsModel
+class CmsDomain extends CmsModel
 {
     protected $fillable = [
         'name',
@@ -21,18 +22,24 @@ class Domain extends CmsModel
         'options' => 'json'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        unset(static::$globalScopes[static::class][JsonActiveScope::class]);
+    }
+
     public function languages(): object
     {
-        return Language::all();
+        return CmsLanguage::all();
     }
 
     public function selectedLanguages(): object
     {
         return $this->belongsToMany(
-            Language::class,
-            'domain_language',
-            'domain_id',
-            'language_id'
+            CmsLanguage::class,
+            'cms_domain_language',
+            'cms_domain_id',
+            'cms_language_id'
         );
     }
 
@@ -73,7 +80,7 @@ class Domain extends CmsModel
             );
         }
 
-        $app->singleton('Domain', function () {
+        $app->singleton('CmsDomain', function () {
             return $this;
         });
     }

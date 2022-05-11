@@ -1,10 +1,10 @@
 <?php
 
-use Modules\Cms\Entities\Domain;
+use Modules\Cms\Entities\CmsDomain;
 
 return [
     'name' => 'Cms',
     'observers' => [
-        Domain::class => \Modules\Cms\Observers\DomainObserver::class
+        CmsDomain::class => \Modules\Cms\Observers\CmsDomainObserver::class
     ]
 ];

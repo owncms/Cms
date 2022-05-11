@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDomainLanguageTable extends Migration
+class CreateCmsDomainLanguageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,22 @@ class CreateDomainLanguageTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('domain_language')) {
-            Schema::create('domain_language', function (Blueprint $table) {
+        if (!Schema::hasTable('cms_domain_language')) {
+            Schema::create('cms_domain_language', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->bigInteger('domain_id')
+                $table->bigInteger('cms_domain_id')
                     ->unsigned()
                     ->index();
-                $table->foreign('domain_id')
+                $table->foreign('cms_domain_id')
                     ->references('id')
-                    ->on('domains')
+                    ->on('cms_domains')
                     ->onDelete('cascade');
-                $table->bigInteger('language_id')
+                $table->bigInteger('cms_language_id')
                     ->unsigned()
                     ->index();
-                $table->foreign('language_id')
+                $table->foreign('cms_language_id')
                     ->references('id')
-                    ->on('languages')
+                    ->on('cms_languages')
                     ->onDelete('cascade');
                 $table->boolean('default')->default(false);
 
@@ -44,6 +44,6 @@ class CreateDomainLanguageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domain_language');
+        Schema::dropIfExists('cms_domain_language');
     }
 }

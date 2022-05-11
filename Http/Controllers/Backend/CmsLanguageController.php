@@ -3,19 +3,19 @@
 namespace Modules\Cms\Http\Controllers\Backend;
 
 use Modules\Admin\Http\Controllers\Controller as CoreController;
-use Modules\Cms\Entities\Language;
-use Modules\Cms\Forms\LanguageForm;
-use Modules\Cms\Http\Requests\LanguageRequest;
+use Modules\Cms\Entities\CmsLanguage;
+use Modules\Cms\Forms\CmsLanguageForm;
+use Modules\Cms\Http\Requests\CmsLanguageRequest;
 
-class LanguageController extends CoreController
+class CmsLanguageController extends CoreController
 {
     public function __construct()
     {
-        $this->model = Language::class;
-        $this->form = LanguageForm::class;
+        $this->model = CmsLanguage::class;
+        $this->form = CmsLanguageForm::class;
         $this->baseView = 'panel.languages';
         $this->baseRoute = 'languages';
-        $this->request = LanguageRequest::class;
+        $this->request = CmsLanguageRequest::class;
         $this->searchableColumns = [
             'name',
             'url'

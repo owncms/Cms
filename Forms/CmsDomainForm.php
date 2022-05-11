@@ -4,7 +4,7 @@ namespace Modules\Cms\Forms;
 
 use Modules\Core\src\FormBuilder\Form;
 
-class DomainForm extends Form
+class CmsDomainForm extends Form
 {
     public function buildForm()
     {

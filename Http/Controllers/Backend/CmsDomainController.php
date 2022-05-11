@@ -3,21 +3,21 @@
 namespace Modules\Cms\Http\Controllers\Backend;
 
 use Modules\Admin\Http\Controllers\Controller as CoreController;
-use Modules\Cms\Entities\Domain;
-use Modules\Cms\Forms\DomainForm;
-use Modules\Cms\Http\Requests\DomainRequest;
+use Modules\Cms\Entities\CmsDomain;
+use Modules\Cms\Forms\CmsDomainForm;
+use Modules\Cms\Http\Requests\CmsDomainRequest;
 use Bouncer;
 use Modules\Cms\src\SearchEngine\SearchEngine;
 
-class DomainController extends CoreController
+class CmsDomainController extends CoreController
 {
     public function __construct()
     {
-        $this->model = Domain::class;
-        $this->form = DomainForm::class;
+        $this->model = CmsDomain::class;
+        $this->form = CmsDomainForm::class;
         $this->baseView = 'panel.domains';
         $this->baseRoute = 'domains';
-        $this->request = DomainRequest::class;
+        $this->request = CmsDomainRequest::class;
         $this->searchableColumns = [
             'name',
             'url'

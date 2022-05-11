@@ -16,6 +16,6 @@
     ],
     "requires": [],
     "abilities": [
-        "Modules\\Cms\\Http\\Controllers\\Backend\\DomainController"
+        "Modules\\Cms\\Http\\Controllers\\Backend\\CmsDomainController"
     ]
 }

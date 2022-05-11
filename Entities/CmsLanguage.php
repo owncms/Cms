@@ -5,7 +5,7 @@ namespace Modules\Cms\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Language extends Model
+class CmsLanguage extends Model
 {
     use SoftDeletes;
 
@@ -25,5 +25,4 @@ class Language extends Model
     {
         return $query->where('active', 1);
     }
-
 }

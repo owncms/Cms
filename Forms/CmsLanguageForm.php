@@ -4,7 +4,7 @@ namespace Modules\Cms\Forms;
 
 use Modules\Core\src\FormBuilder\Form;
 
-class LanguageForm extends Form
+class CmsLanguageForm extends Form
 {
     public function buildForm()
     {

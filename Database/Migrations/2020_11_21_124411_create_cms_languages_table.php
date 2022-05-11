@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDomainsTable extends Migration
+class CreateCmsLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateDomainsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('domains')) {
-            Schema::create('domains', function (Blueprint $table) {
+        if (!Schema::hasTable('cms_languages')) {
+            Schema::create('cms_languages', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('name')->unique();
-                $table->string('url', 100)->default('*')->unique();
+                $table->string('name', 100);
+                $table->string('locale', 10);
+                $table->string('date_format', 100)->nullable();
+                $table->boolean('is_rtl')->default(false);
                 $table->json('options')->nullable();
-                $table->boolean('active')->default(0)->nullable(false);
-                $table->boolean('default')->default(0)->nullable(false);
+
                 $table->softDeletes();
                 $table->timestamps();
-
-                $table->index('url');
             });
         }
     }
@@ -36,6 +35,6 @@ class CreateDomainsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domains');
+        Schema::dropIfExists('cms_languages');
     }
 }

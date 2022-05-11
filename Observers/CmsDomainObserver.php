@@ -4,16 +4,16 @@ namespace Modules\Cms\Observers;
 
 use Modules\Cms\Entities\Domain;
 
-class DomainObserver
+class CmsDomainObserver
 {
 
     /**
      * Handle the User "updated" event.
      *
-     * @param \Modules\Cms\Entities\Domain $domain
+     * @param \Modules\Cms\Entities\CmsDomain $domain
      * @return void
      */
-    public function updating(Domain $domain)
+    public function updating(CmsDomain $domain)
     {
         if (request()->get('active') == 0) {
             $domain->default = 0;
@@ -23,10 +23,10 @@ class DomainObserver
     /**
      * Handle the Domain "saved" event.
      *
-     * @param \Modules\Cms\Entities\Domain $domain
+     * @param \Modules\Cms\Entities\CmsDomain $domain
      * @return void
      */
-    public function saved(Domain $domain)
+    public function saved(CmsDomain $domain)
     {
         $data = request()->all();
         if (isset($data['selected_languages'])) {
@@ -44,23 +44,12 @@ class DomainObserver
     /**
      * Handle the User "deleting" event.
      *
-     * @param \Modules\Cms\Entities\Domain $domain
+     * @param \Modules\Cms\Entities\CmsDomain $domain
      * @return void
      */
-    public function deleting(Domain $domain)
+    public function deleting(CmsDomain $domain)
     {
         $domain->default = 0;
         $domain->active = 0;
-    }
-
-    /**
-     * Handle the User "deleted" event.
-     *
-     * @param \Modules\Cms\Entities\Domain $domain
-     * @return void
-     */
-    public function deleted(Domain $domain)
-    {
-        //
     }
 }

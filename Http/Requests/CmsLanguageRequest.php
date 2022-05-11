@@ -4,7 +4,7 @@ namespace Modules\Cms\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DomainRequest extends FormRequest
+class CmsLanguageRequest extends FormRequest
 {
     protected $modelId = null;
 
@@ -16,10 +16,10 @@ class DomainRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => "required|unique:domains,name,$this->modelId|string|max:255",
-            'url' => "required|unique:domains,url,$this->modelId|string|max:255",
-            'selected_languages' => 'required',
-            'default_language' => 'required',
+            'name' => "required|unique:cms_languages,name,$this->modelId|string|max:255",
+            'locale' => "required",
+            'date_format' => "required",
+            'is_rtl' => "required",
         ];
     }
 
