@@ -16,8 +16,8 @@ class CmsDomainRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => "required|unique:domains,name,$this->modelId|string|max:255",
-            'url' => "required|unique:domains,url,$this->modelId|string|max:255",
+            'name' => "required|unique:cms_domains,name,$this->modelId|string|max:255",
+            'url' => "required|unique:cms_domains,url,$this->modelId|string|max:255",
             'selected_languages' => 'required',
             'default_language' => 'required',
         ];

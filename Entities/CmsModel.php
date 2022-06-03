@@ -44,6 +44,9 @@ class CmsModel extends CoreModel
      */
     public function sluggable(): array
     {
+        if (!\Schema::hasColumn($this->getTable(), 'slug')) {
+            return [];
+        }
         return [
             'slug' => [
                 'source' => 'name'
