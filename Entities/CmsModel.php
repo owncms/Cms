@@ -36,7 +36,7 @@ class CmsModel extends CoreModel
     protected static function boot()
     {
         parent::boot();
-        return static::addGlobalScope(new JsonActiveScope);
+        static::addGlobalScope(new JsonActiveScope);
     }
 
     /**
