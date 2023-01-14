@@ -2,19 +2,23 @@
 
 namespace Modules\Cms\Entities;
 
+use Modules\Cms\Scopes\JsonActiveScope;
+use Modules\Cms\src\SeoManager\Traits\SeoHelper;
+use Modules\Cms\Traits\Mediable;
 use Modules\Core\Entities\CoreModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Modules\Cms\Traits\CmsTrait;
 use Modules\Admin\Traits\OnlineModel;
 use Modules\Core\Traits\Translatable;
 
 class CmsModel extends CoreModel
 {
     use SoftDeletes;
-    use CmsTrait;
     use OnlineModel;
     use Translatable;
+    use Sluggable;
+    use Mediable;
+    use SeoHelper;
 
     protected $dates = [
         'deleted_at',
@@ -24,16 +28,25 @@ class CmsModel extends CoreModel
 
     public array $translatable = [
         'name',
+        'slug',
+        'short_content',
+        'content'
     ];
 
-    public function __construct(array $attributes = [])
+    protected static function boot()
     {
-        parent::__construct($attributes);
-        $this->bootListeners();
+        parent::boot();
+        static::addGlobalScope(new JsonActiveScope);
     }
 
+    /**
+     * @return \string[][]
+     */
     public function sluggable(): array
     {
+        if (!\Schema::hasColumn($this->getTable(), 'slug')) {
+            return [];
+        }
         return [
             'slug' => [
                 'source' => 'name'
@@ -41,4 +54,55 @@ class CmsModel extends CoreModel
         ];
     }
 
+    /**
+     * Retrieve the model for a bound value.
+     *
+     * @param mixed $value
+     * @param string|null $field
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        if (!config('system.is_frontend')) {
+            return parent::resolveRouteBinding($value, $field);
+        }
+        $locale = app()->getLocale();
+        $request = request();
+        if (!$field) {
+            if ($request->route() && in_array($request->route()->getActionMethod(), ['edit'])) {
+                $field = 'id';
+            } else {
+                $field = 'slug';
+            }
+        }
+        $whereClause = '';
+        if (property_exists($this, 'translatable')) {
+            if (is_array($this->translatable) && in_array($field, $this->translatable)) {
+                $whereClause = "$field->$locale";
+            }
+        }
+        if (!$whereClause) {
+            $whereClause = $field;
+        }
+
+        return $this->where($whereClause, $value)->firstOrFail();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeo()
+    {
+        $class = get_class($this);
+        $item = CmsSeoData::where('class_type', $class)->where('model_id', $this->id)->first();
+        if (!$item) {
+            $item = CmsSeoData::create(
+                [
+                    'class_type' => $class,
+                    'model_id' => $this->id
+                ]
+            );
+        }
+        return $item;
+    }
 }

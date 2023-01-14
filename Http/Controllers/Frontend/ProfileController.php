@@ -10,6 +10,9 @@ class ProfileController extends Controller
 {
     public function dashboard()
     {
+        if (!auth()->check()) {
+            return redirect(route('Front::cms.login'));
+        }
         $user = auth()->user();
         return $this->view(
             'cms.profile.dashboard',
@@ -19,6 +22,9 @@ class ProfileController extends Controller
         );
     }
 
+    /**
+     * @return \Illuminate\Http\Response
+     */
     public function edit()
     {
         $user = auth()->user();
@@ -30,6 +36,10 @@ class ProfileController extends Controller
         );
     }
 
+    /**
+     * @param CmsUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(CmsUserRequest $request)
     {
         $user = auth()->user();

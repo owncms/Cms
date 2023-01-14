@@ -12,16 +12,19 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Cms\\Providers\\CmsServiceProvider"
+                "Modules\\Cms\\Providers\\CmsServiceProvider",
+                "Plank\\Mediable\\MediableServiceProvider"
             ],
             "aliases": {
+                "MediaUploader": "Plank\\Mediable\\MediaUploaderFacade"
             }
         }
     },
     "require": {
         "owncms/core": "dev-master",
-        "kalnoy/nestedset": "^5.0",
-        "facuz/laravel-themes": "^3.2"
+        "kalnoy/nestedset": "v5.x-dev",
+        "facuz/laravel-themes": "^3.2",
+        "plank/laravel-mediable": "5.3.*"
     },
     "autoload": {
         "psr-4": {

@@ -4,7 +4,7 @@ namespace Modules\Cms\Forms;
 
 use Modules\Core\src\FormBuilder\Form;
 
-class DomainForm extends Form
+class CmsDomainForm extends Form
 {
     public function buildForm()
     {
@@ -12,5 +12,6 @@ class DomainForm extends Form
         $this->add('url');
         $this->add('active', 'checkbox');
         $this->add('default', 'checkbox');
+        $this->add('options');
     }
 }

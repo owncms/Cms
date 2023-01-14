@@ -3,7 +3,7 @@
     "alias": "cms",
     "description": "",
     "keywords": [],
-    "priority": 3,
+    "priority": 2,
     "providers": [
         "Modules\\Cms\\Providers\\CmsServiceProvider",
         "Facuz\\Theme\\ThemeServiceProvider"
@@ -11,9 +11,11 @@
     "aliases": {
         "Theme": "Facuz\\Theme\\Facades\\Theme"
     },
-    "files": [],
+    "files": [
+        "helpers.php"
+    ],
     "requires": [],
     "abilities": [
-        "Modules\\Cms\\Http\\Controllers\\Backend\\DomainController"
+        "Modules\\Cms\\Http\\Controllers\\Backend\\CmsDomainController"
     ]
 }

@@ -3,8 +3,8 @@
 namespace Modules\Cms;
 
 use Illuminate\Support\Facades\Artisan;
-use Modules\Cms\Entities\Domain;
-use Modules\Cms\Entities\Language;
+use Modules\Cms\Entities\CmsDomain;
+use Modules\Cms\Entities\CmsLanguage;
 use Modules\Core\src\Modules\BaseModule;
 
 class Module extends BaseModule
@@ -22,17 +22,17 @@ class Module extends BaseModule
 
     public function checkDomain()
     {
-        $domain = Domain::withTrashed()->first();
+        $domain = CmsDomain::withTrashed()->first();
         if (!$domain) {
             $data = [
                 'name' => 'Default',
                 'active' => 1,
                 'default' => 1
             ];
-            $domain = Domain::create($data);
-            $language = Language::where('locale', 'en')->first();
+            $domain = CmsDomain::create($data);
+            $language = CmsLanguage::where('locale', 'en')->first();
             if (!$language) {
-                $language = Language::create(
+                $language = CmsLanguage::create(
                     [
                         'name' => 'English',
                         'locale' => 'en',

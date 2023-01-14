@@ -1,11 +1,11 @@
 <?php
 
-use \Backend\DomainController;
-use \Backend\LanguageController;
+use \Backend\CmsDomainController;
+use \Backend\CmsLanguageController;
 
 Route::prefix('cms')->name('cms.')->group(function () {
     Route::middleware(['auth:admin'])->group(function () {
-        Route::resource('domains', DomainController::class);
-        Route::resource('languages', LanguageController::class);
+        Route::resource('domains', CmsDomainController::class);
+        Route::resource('languages', CmsLanguageController::class);
     });
 });

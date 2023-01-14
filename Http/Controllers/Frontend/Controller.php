@@ -3,20 +3,24 @@
 namespace Modules\Cms\Http\Controllers\Frontend;
 
 use Modules\Core\Http\Controllers\BaseController;
-use Modules\Cms\Entities\Domain;
-use Modules\Cms\Forms\DomainForm;
-use Modules\Cms\Http\Requests\DomainRequest;
+use Modules\Cms\Entities\CmsDomain;
+use Modules\Cms\Forms\CmsDomainForm;
+use Modules\Cms\Http\Requests\CmsDomainRequest;
 use Facuz\Theme\Contracts\Theme;
 
 class Controller extends BaseController
 {
+    protected $locale;
     public $domain;
-    protected $theme;
+    public $theme;
+    public $seo;
 
     public function __construct(Theme $theme)
     {
-        $this->domain = resolve('Domain');
+        $this->domain = resolve('CmsDomain');
         $this->theme = $theme->layout('default');
+        $this->locale = app()->getLocale();
+        $this->seo = app('SeoManager');
     }
 
     /**

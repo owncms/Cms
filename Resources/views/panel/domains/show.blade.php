@@ -1,1 +1,1 @@
-@include('cms::panel.languages.form', ['edit' => 0])
+@include('cms::panel.domains.form', ['edit' => 0])
