@@ -33,7 +33,7 @@ class CmsDomainController extends CoreController
     {
         $item = $this->model::withTrashed()->findOrFail($id);
         if (!Bouncer::can('edit', $item)) {
-            return abort(403);
+            abort(403);
         }
         $form = $this->form($this->form, [
             'method' => 'PUT',

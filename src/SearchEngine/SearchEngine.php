@@ -2,7 +2,7 @@
 
 namespace Modules\Cms\src\SearchEngine;
 
-use Modules\Cms\Entities\Domain;
+use Modules\Cms\Entities\CmsDomain;
 use Modules\Core\Facades\Application;
 
 class SearchEngine
@@ -11,7 +11,7 @@ class SearchEngine
     private $modules;
     private $domain;
 
-    public function __construct(Domain $domain)
+    public function __construct(CmsDomain $domain)
     {
         $this->domain = $domain;
         $this->setActiveModules();
