@@ -10,6 +10,9 @@ class ProfileController extends Controller
 {
     public function dashboard()
     {
+        if (!auth()->check()) {
+            return redirect(route('Front::cms.login'));
+        }
         $user = auth()->user();
         return $this->view(
             'cms.profile.dashboard',

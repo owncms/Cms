@@ -2,7 +2,7 @@
 
 namespace Modules\Cms\Observers;
 
-use Modules\Cms\Entities\Domain;
+use Modules\Cms\Entities\CmsDomain;
 
 class CmsDomainObserver
 {
@@ -13,7 +13,7 @@ class CmsDomainObserver
      * @param \Modules\Cms\Entities\CmsDomain $domain
      * @return void
      */
-    public function updating(CmsDomain $domain)
+    public function updating(CmsDomain $domain): void
     {
         if (request()->get('active') == 0) {
             $domain->default = 0;
@@ -26,7 +26,7 @@ class CmsDomainObserver
      * @param \Modules\Cms\Entities\CmsDomain $domain
      * @return void
      */
-    public function saved(CmsDomain $domain)
+    public function saved(CmsDomain $domain): void
     {
         $data = request()->all();
         if (isset($data['selected_languages'])) {
@@ -47,7 +47,7 @@ class CmsDomainObserver
      * @param \Modules\Cms\Entities\CmsDomain $domain
      * @return void
      */
-    public function deleting(CmsDomain $domain)
+    public function deleting(CmsDomain $domain): void
     {
         $domain->default = 0;
         $domain->active = 0;

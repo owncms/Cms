@@ -16,11 +16,11 @@ Route::get('search/{type}', [SearchController::class, 'search'])->name('search')
 //auth
 Route::group(['prefix' => 'my-account'], function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-    Route::group(['middleware' => ['auth:web']], function () {
+//    Route::group(['middleware' => ['auth']], function () {
         Route::get('profile', [ProfileController::class, 'dashboard'])->name('profile');
         Route::get('profile/change', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::post('profile/change', [ProfileController::class, 'update'])->name('profile.change');
-    });
+//    });
 });
 
 Route::get('link/{hash}', [ShortLinkController::class, 'redirect'])->name('short_link.redirect');

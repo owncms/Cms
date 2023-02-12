@@ -110,24 +110,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show" id="search" role="tabpanel"
-                                 aria-labelledby="pills-search-tab">
-                                <div class="row">
-                                    @foreach($searchableModels as $moduleName => $models)
-                                        <div class="col-md-12 title">{{ $moduleName }}</div>
-                                        @foreach($models as $model => $trans)
-                                            <div class="row">
-                                                <div class="col-md-2 text-left"><span
-                                                        class="pl-3">{{ $model }}</span>
+                            @if(isset($searchableModels))
+                                <div class="tab-pane fade show" id="search" role="tabpanel"
+                                     aria-labelledby="pills-search-tab">
+                                    <div class="row">
+                                        @foreach($searchableModels as $moduleName => $models)
+                                            <div class="col-md-12 title">{{ $moduleName }}</div>
+                                            @foreach($models as $model => $trans)
+                                                <div class="row">
+                                                    <div class="col-md-2 text-left"><span
+                                                            class="pl-3">{{ $model }}</span>
+                                                    </div>
+                                                    <div class="col-md-2 text-left"><span
+                                                            class="pl-3">{{ $trans }}</span>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-2 text-left"><span
-                                                        class="pl-3">{{ $trans }}</span>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         @endforeach
-                                    @endforeach
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             {!! form_end($form, false) !!}
                         </div>
                     </div>

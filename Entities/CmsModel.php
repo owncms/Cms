@@ -36,7 +36,7 @@ class CmsModel extends CoreModel
     protected static function boot()
     {
         parent::boot();
-        return static::addGlobalScope(new JsonActiveScope);
+        static::addGlobalScope(new JsonActiveScope);
     }
 
     /**
@@ -44,6 +44,9 @@ class CmsModel extends CoreModel
      */
     public function sluggable(): array
     {
+        if (!\Schema::hasColumn($this->getTable(), 'slug')) {
+            return [];
+        }
         return [
             'slug' => [
                 'source' => 'name'
