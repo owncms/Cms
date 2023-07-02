@@ -22,9 +22,9 @@
     },
     "require": {
         "owncms/core": "dev-master",
-        "kalnoy/nestedset": "v5.x-dev",
+        "kalnoy/nestedset": "v6.0.2",
         "facuz/laravel-themes": "^3.2",
-        "plank/laravel-mediable": "5.3.*"
+        "plank/laravel-mediable": "^5.3.*"
     },
     "autoload": {
         "psr-4": {
