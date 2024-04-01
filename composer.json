@@ -28,7 +28,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Cms\\": ""
+            "Modules\\Cms\\": "",
+            "Modules\\Cms\\App\\": "app/"
         }
     }
 }

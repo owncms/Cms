@@ -28,7 +28,7 @@ class CreateCmsLinksTable extends Migration
                 $table->softDeletes();
 
                 $table->index(['class_type', 'model_id']);
-                $table->unique(['final_path'], 'UNIQUE_FULL_PATH');
+//                $table->unique(['final_path'], 'UNIQUE_FULL_PATH');
             });
         }
     }

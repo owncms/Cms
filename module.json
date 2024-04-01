@@ -5,17 +5,18 @@
     "keywords": [],
     "priority": 2,
     "providers": [
-        "Modules\\Cms\\Providers\\CmsServiceProvider",
+        "Modules\\Cms\\App\\Providers\\CmsServiceProvider",
+        "Modules\\Cms\\App\\Providers\\RouteServiceProvider",
         "Facuz\\Theme\\ThemeServiceProvider"
     ],
     "aliases": {
         "Theme": "Facuz\\Theme\\Facades\\Theme"
     },
     "files": [
-        "helpers.php"
+        "App/helpers.php"
     ],
     "requires": [],
     "abilities": [
-        "Modules\\Cms\\Http\\Controllers\\Backend\\CmsDomainController"
+        "Modules\\Cms\\App\\Http\\Controllers\\Backend\\CmsDomainController"
     ]
 }
